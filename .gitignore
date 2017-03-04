@@ -16,3 +16,5 @@ react/.idea
 *.iml
 target/
 generated/
+npm-debug.log
+config.js

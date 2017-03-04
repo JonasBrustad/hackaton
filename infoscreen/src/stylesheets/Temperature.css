@@ -1,0 +1,15 @@
+th{
+    background-color: #3d9970;
+    text-align: left;
+    border: 1px solid #000000;
+}
+
+td{
+    text-align: left;
+    border: 1px solid #000000;
+}
+
+table{
+    border: 1px solid #000000;
+    border-collapse: collapse;
+}
