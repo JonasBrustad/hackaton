@@ -3,7 +3,6 @@ import "../stylesheets/Temperature.css";
 
 class Temperature extends Component {
     render(){
-        console.log(this.props.main);
         return(
           <div>
             <table>

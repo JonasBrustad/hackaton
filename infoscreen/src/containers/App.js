@@ -3,6 +3,7 @@ import axios from "axios";
 import WeatherList from "../components/WeatherList";
 import Temperature from "../components/Temperature";
 import Wind from "../components/Wind";
+import Icon from "../components/Icon";
 import Header from "../components/Header";
 import Button from "../components/Button";
 import "../stylesheets/App.css";
@@ -10,14 +11,14 @@ import "../stylesheets/App.css";
 class App extends Component {
 
     city = 1;
-    mykey = config.MY_KEY;
 
     constructor(props){
         super(props);
         this.state = {
             weather:[],
             main:{},
-            wind:{}
+            wind:{},
+            icon:''
         };
     }
 
@@ -31,15 +32,27 @@ class App extends Component {
         }
     }
 
+    updateCity(city){
+        switch (city){
+            case 'New York':
+                this.fetchWeatherData(5128581)
+                break;
+            case 'Oslo':
+                this.fetchWeatherData(6453366)
+                break;
+        }
+    }
+
     fetchWeatherData(id){
         var self = this;
-        axios.get('http://api.openweathermap.org/data/2.5/weather?id=' + id + '&APPID=' + this.mykey + '&units=metric')
+        axios.get('http://api.openweathermap.org/data/2.5/weather?id=' + id + '&APPID=&units=metric')
             .then(function(response){
                 self.setState({
                     weather: response.data.weather,
                     main: response.data.main,
                     wind: response.data.wind,
-                    name: response.data.name
+                    name: response.data.name,
+                    icon: response.data.weather[0].icon
                 })
             });
     }
@@ -54,6 +67,7 @@ class App extends Component {
         return (
             <div className="App">
                 <Header city={this.state.name}/>
+                <Icon icon={this.state.icon}/>
                 <WeatherList weather={this.state.weather} />
                 <Temperature main={this.state.main}/>
                 <Wind wind={this.state.wind}/>
